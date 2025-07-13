@@ -7,6 +7,8 @@
 
   dependencies.ripgrep.enable = true;
 
+  colorschemes.gruvbox-material.enable = true;
+
   opts = {
     tabstop = 2; # Number of spaces a tab counts for
     shiftwidth = 2; # Number of spaces for each indentation level
@@ -189,20 +191,19 @@
     toggleterm.settings.direction = "float";
 
     lazygit.enable = true;
+
+    no-neck-pain.enable = true;
+    no-neck-pain.settings = {
+
+      autocmds.enableOnVimEnter = true;
+      autocmds.skipEnteringNoNeckPainBuffer = true;
+
+      options.width = 100;
+      options.minSideBufferWidth = 100;
+
+      buffers.right.enabled = false;
+      buffers.wo.fillchars = "vert: ,eob: ";
+
+    };
   };
-
-  extraPlugins = with pkgs.vimPlugins; [
-    no-neck-pain-nvim
-    gruvbox-material
-  ];
-
-  extraConfigLua = ''
-    vim.deprecate = function() end
-    vim.cmd("colorscheme gruvbox-material")
-    require("no-neck-pain").setup({
-    	autocmds = { enableOnVimEnter = true, skipEnteringNoNeckPainBuffer = true },
-    	options = { width = 100, minSideBufferWidth = 100 },
-    	buffers = { right = { enabled = false }, wo = { fillchars = "vert: ,eob: " } },
-    })
-  '';
 }
