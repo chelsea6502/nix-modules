@@ -7,8 +7,6 @@
 
   dependencies.ripgrep.enable = true;
 
-  colorschemes.gruvbox-material.enable = true;
-
   opts = {
     tabstop = 2; # Number of spaces a tab counts for
     shiftwidth = 2; # Number of spaces for each indentation level
@@ -206,4 +204,11 @@
 
     };
   };
+
+  extraPlugins = with pkgs.vimPlugins; [ gruvbox-material ];
+
+  extraConfigLua = ''
+    vim.deprecate = function() end
+    vim.cmd("colorscheme gruvbox-material")
+  '';
 }
