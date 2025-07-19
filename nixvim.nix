@@ -153,6 +153,7 @@
     avante.enable = true;
     avante.settings.hints.enabled = false;
     avante.settings.providers.claude.model = "claude-sonnet-4-20250514";
+    # codecompanion.enable = true;
     typescript-tools.enable = true;
 
     treesitter.enable = true;
@@ -179,9 +180,6 @@
     telescope.extensions.project.enable = true;
     telescope.extensions.file-browser.enable = true;
 
-    project-nvim.enable = true;
-    project-nvim.settings.manual_mode = false;
-
     noice.enable = true;
     web-devicons.enable = true;
 
@@ -205,10 +203,12 @@
     };
   };
 
+  # colorschemes.gruvbox-material.enable = true;
+
   extraPlugins = with pkgs.vimPlugins; [ gruvbox-material ];
 
   extraConfigLua = ''
-    vim.deprecate = function() end
-    vim.cmd("colorscheme gruvbox-material")
+    		vim.deprecate = function() end
+    		vim.cmd("colorscheme gruvbox-material")
   '';
 }
