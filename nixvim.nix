@@ -161,14 +161,7 @@
     treesitter.settings.highlight.enable = true;
 
     lsp.enable = true;
-    lsp.onAttach = ''
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        callback = function()
-          vim.lsp.buf.format({ async = false })
-        end,
-      })
-    '';
-
+    lsp-format.enable = true;
     lsp.servers.nil_ls.enable = true;
     lsp.servers.nil_ls.settings.formatting.command = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
     lsp.servers.nil_ls.settings.nix.flake.autoArchive = true;
@@ -177,7 +170,6 @@
     lsp.servers.clangd.enable = true;
 
     telescope.enable = true;
-    telescope.extensions.project.enable = true;
     telescope.extensions.file-browser.enable = true;
 
     noice.enable = true;
@@ -207,6 +199,7 @@
 
   extraPlugins = with pkgs.vimPlugins; [ gruvbox-material ];
 
+  # Nui and Avante are old versions
   extraConfigLua = ''
     		vim.deprecate = function() end
     		vim.cmd("colorscheme gruvbox-material")
