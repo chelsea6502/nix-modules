@@ -150,10 +150,11 @@
 
     blink-copilot.enable = true;
 
+    # aider-nvim.enable = true;
     avante.enable = true;
     avante.settings.hints.enabled = false;
     avante.settings.providers.claude.model = "claude-sonnet-4-20250514";
-    # codecompanion.enable = true;
+
     typescript-tools.enable = true;
 
     treesitter.enable = true;
@@ -181,18 +182,12 @@
     lazygit.enable = true;
 
     no-neck-pain.enable = true;
-    no-neck-pain.settings = {
-
-      autocmds.enableOnVimEnter = true;
-      autocmds.skipEnteringNoNeckPainBuffer = true;
-
-      options.width = 100;
-      options.minSideBufferWidth = 100;
-
-      buffers.right.enabled = false;
-      buffers.wo.fillchars = "vert: ,eob: ";
-
-    };
+    no-neck-pain.autocmds.enableOnVimEnter = true;
+    no-neck-pain.autocmds.skipEnteringNoNeckPainBuffer = true;
+    no-neck-pain.options.width = 100;
+    no-neck-pain.options.minSideBufferWidth = 100;
+    no-neck-pain.buffers.right.enabled = false;
+    no-neck-pain.buffers.wo.fillchars = "vert: ,eob: ";
   };
 
   # colorschemes.gruvbox-material.enable = true;
