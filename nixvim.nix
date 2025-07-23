@@ -182,12 +182,12 @@
     lazygit.enable = true;
 
     no-neck-pain.enable = true;
-    no-neck-pain.autocmds.enableOnVimEnter = true;
-    no-neck-pain.autocmds.skipEnteringNoNeckPainBuffer = true;
-    no-neck-pain.options.width = 100;
-    no-neck-pain.options.minSideBufferWidth = 100;
-    no-neck-pain.buffers.right.enabled = false;
-    no-neck-pain.buffers.wo.fillchars = "vert: ,eob: ";
+    no-neck-pain.settings.autocmds.enableOnVimEnter = true;
+    no-neck-pain.settings.autocmds.skipEnteringNoNeckPainBuffer = true;
+    no-neck-pain.settings.options.width = 100;
+    no-neck-pain.settings.options.minSideBufferWidth = 100;
+    no-neck-pain.settings.buffers.right.enabled = false;
+    no-neck-pain.settings.buffers.wo.fillchars = "vert: ,eob: ";
   };
 
   # colorschemes.gruvbox-material.enable = true;
