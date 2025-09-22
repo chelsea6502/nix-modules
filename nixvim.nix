@@ -168,8 +168,6 @@
     lsp.servers.nil_ls.settings.nix.flake.autoArchive = true;
     lsp.servers.nil_ls.settings.nix.flake.autoEvalInputs = true;
 
-    lsp.servers.dockerls.enable = false; # fix for an error
-
     telescope.enable = true;
     telescope.extensions.file-browser.enable = true;
 
