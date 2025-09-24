@@ -188,13 +188,11 @@
     no-neck-pain.settings.buffers.wo.fillchars = "vert: ,eob: ";
   };
 
-  # colorschemes.gruvbox-material.enable = true;
-
-  extraPlugins = with pkgs.vimPlugins; [ gruvbox-material ];
+  colorschemes.gruvbox-material.enable = true;
+  colorschemes.gruvbox-material.autoLoad = true;
 
   # Nui and Avante are old versions
   extraConfigLua = ''
     		vim.deprecate = function() end
-    		vim.cmd("colorscheme gruvbox-material")
   '';
 }
