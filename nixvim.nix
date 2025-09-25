@@ -3,7 +3,7 @@
   enable = true;
 
   globals.mapleader = " ";
-  clipboard.providers.wl-copy.enable = true;
+  #clipboard.providers.wl-copy.enable = true;
 
   dependencies.ripgrep.enable = true;
 
