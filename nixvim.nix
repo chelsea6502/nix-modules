@@ -193,6 +193,7 @@
 
   # Nui and Avante are old versions
   extraConfigLua = ''
+        vim.cmd("colorscheme gruvbox-material")
     		vim.deprecate = function() end
   '';
 }
