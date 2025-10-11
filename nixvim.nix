@@ -188,25 +188,31 @@
 
   # Nui and Avante are old versions
   extraConfigLua = ''
-    		vim.deprecate = function() end
-    		vim.cmd("colorscheme gruvbox-material")
-    		
-    		-- Configure no-neck-pain manually
-    		require("no-neck-pain").setup({
-    		  autocmds = {
-    		    enableOnVimEnter = true,
-    		    skipEnteringNoNeckPainBuffer = true,
-    		  },
-    		  width = 100,
-    		  minSideBufferWidth = 100,
-    		  buffers = {
-    		    right = {
-    		      enabled = false,
-    		    },
-    		    wo = {
-    		      fillchars = "vert: ,eob: ",
-    		    },
-    		  },
-    		})
+    vim.deprecate = function() end
+    vim.cmd("colorscheme gruvbox-material")
+    
+    -- Configure no-neck-pain manually
+    local nnp_ok, nnp = pcall(require, "no-neck-pain")
+    if nnp_ok then
+      nnp.setup({
+        width = 100,
+        minSideBufferWidth = 100,
+        buffers = {
+          right = {
+            enabled = false,
+          },
+          wo = {
+            fillchars = "vert: ,eob: ",
+          },
+        },
+      })
+      
+      -- Enable no-neck-pain after a short delay
+      vim.defer_fn(function()
+        vim.cmd("NoNeckPain")
+      end, 100)
+    else
+      vim.notify("no-neck-pain plugin not found", vim.log.levels.ERROR)
+    end
   '';
 }
