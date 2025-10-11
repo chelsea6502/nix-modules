@@ -150,7 +150,6 @@
 
     blink-copilot.enable = true;
 
-    # aider-nvim.enable = true;
     avante.enable = true;
     avante.settings.hints.enabled = false;
     avante.settings.providers.claude.model = "claude-sonnet-4-20250514";
@@ -178,22 +177,36 @@
     toggleterm.settings.direction = "float";
 
     lazygit.enable = true;
-
-    no-neck-pain.enable = true;
-    no-neck-pain.settings.autocmds.enableOnVimEnter = true;
-    no-neck-pain.settings.autocmds.skipEnteringNoNeckPainBuffer = true;
-    no-neck-pain.settings.options.width = 100;
-    no-neck-pain.settings.options.minSideBufferWidth = 100;
-    no-neck-pain.settings.buffers.right.enabled = false;
-    no-neck-pain.settings.buffers.wo.fillchars = "vert: ,eob: ";
   };
 
-  colorschemes.gruvbox-material.enable = true;
-  colorschemes.gruvbox-material.autoLoad = true;
+  # colorschemes.gruvbox-material.enable = true;
+
+  extraPlugins = with pkgs.vimPlugins; [
+    gruvbox-material
+    no-neck-pain-nvim
+  ];
 
   # Nui and Avante are old versions
   extraConfigLua = ''
-        vim.cmd("colorscheme gruvbox-material")
     		vim.deprecate = function() end
+    		vim.cmd("colorscheme gruvbox-material")
+    		
+    		-- Configure no-neck-pain manually
+    		require("no-neck-pain").setup({
+    		  autocmds = {
+    		    enableOnVimEnter = true,
+    		    skipEnteringNoNeckPainBuffer = true,
+    		  },
+    		  width = 100,
+    		  minSideBufferWidth = 100,
+    		  buffers = {
+    		    right = {
+    		      enabled = false,
+    		    },
+    		    wo = {
+    		      fillchars = "vert: ,eob: ",
+    		    },
+    		  },
+    		})
   '';
 }
