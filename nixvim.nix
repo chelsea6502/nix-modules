@@ -1,104 +1,52 @@
 { pkgs, ... }:
+let
+  mkKeymap = key: action: { inherit key action; };
+in
 {
   enable = true;
-
   globals.mapleader = " ";
-  #clipboard.providers.wl-copy.enable = true;
-
   dependencies.ripgrep.enable = true;
 
   opts = {
-    tabstop = 2; # Number of spaces a tab counts for
-    shiftwidth = 2; # Number of spaces for each indentation level
-    softtabstop = 2; # Number of spaces a tab counts for when editing
-    number = true; # Show line numbers
-    colorcolumn = "80"; # Highlight the 80th column
-    cursorline = true; # Highlight the current line
-    termguicolors = true; # Use GUI colors in terminal
-    virtualedit = "onemore"; # Allow cursor to move past the last character
-    textwidth = 80; # Maximum width of text being inserted
-    relativenumber = true; # Show relative line numbers
-    clipboard = "unnamedplus"; # Use system clipboard
-    updatetime = 50; # Time in ms before swap file is written
-    laststatus = 0; # Never show status line
-    cmdheight = 0; # Command line height (0 = hide when not in use)
-    ignorecase = true; # Ignore case in search patterns
-    smartcase = true; # Override ignorecase when pattern has uppercase
-    scrolloff = 10; # Min number of lines to keep above/below cursor
-    undofile = true; # Save undo history to a file
-    undodir = "/tmp/.vim-undo-dir"; # Directory to store undo files
+    tabstop = 2;
+    shiftwidth = 2;
+    softtabstop = 2;
+    number = true;
+    colorcolumn = "80";
+    cursorline = true;
+    termguicolors = true;
+    virtualedit = "onemore";
+    textwidth = 80;
+    relativenumber = true;
+    clipboard = "unnamedplus";
+    updatetime = 50;
+    laststatus = 0;
+    cmdheight = 0;
+    ignorecase = true;
+    smartcase = true;
+    scrolloff = 10;
+    undofile = true;
+    undodir = "/tmp/.vim-undo-dir";
   };
 
   keymaps = [
-    {
-      action = "1<C-u>";
-      key = "<ScrollWheelUp>";
-    }
-    {
-      action = "1<C-d>";
-      key = "<ScrollWheelDown>";
-    }
-    {
-      action = "<cmd>lua vim.lsp.buf.hover()<CR>";
-      key = "<leader>a";
-    }
-    {
-      action = "<cmd>lua vim.lsp.buf.type_definition()<CR>";
-      key = "<leader>s";
-    }
-    {
-      action = "<cmd>lua vim.diagnostic.open_float()<CR>";
-      key = "<leader>d";
-    }
-    {
-      action = "<cmd>lua vim.lsp.buf.code_action()<CR>";
-      key = "<leader>f";
-    }
-    {
-      action = "<cmd>Telescope file_browser<CR>";
-      key = "ft";
-    }
-    {
-      action = "<cmd>Telescope find_files<CR>";
-      key = "ff";
-    }
-    {
-      action = "<cmd>Telescope project<CR>";
-      key = "FF";
-    }
-    {
-      action = "<cmd>Telescope current_buffer_fuzzy_find theme=dropdown<CR>";
-      key = "/";
-    }
-    {
-      action = "<cmd>AvanteChat<CR>";
-      key = "<leader>ac";
-    }
-    {
-      action = "<cmd>AvanteChatNew<CR>";
-      key = "<leader>aC";
-    }
-    {
-      action = "<cmd>Gitsigns reset_hunk<CR>";
-      key = "<leader>gr";
-    }
-    {
-      action = "<cmd>Gitsigns reset_buffer<CR>";
-      key = "<leader>gR";
-    }
-    {
-      action = "<cmd>LazyGit<CR>";
-      key = "<leader>gg";
-    }
-    {
-      action = "<cmd>ToggleTerm<CR>";
-      key = "t";
-    }
-    {
-      action = "<cmd>WhichKey<CR>";
-      key = "<leader>w";
-    }
-
+    (mkKeymap "<ScrollWheelUp>" "1<C-u>")
+    (mkKeymap "<ScrollWheelDown>" "1<C-d>")
+    (mkKeymap "<leader>a" "<cmd>lua vim.lsp.buf.hover()<CR>")
+    (mkKeymap "<leader>s" "<cmd>lua vim.lsp.buf.type_definition()<CR>")
+    (mkKeymap "<leader>d" "<cmd>lua vim.diagnostic.open_float()<CR>")
+    (mkKeymap "<leader>f" "<cmd>lua vim.lsp.buf.code_action()<CR>")
+    (mkKeymap "ft" "<cmd>Telescope file_browser<CR>")
+    (mkKeymap "ff" "<cmd>Telescope find_files<CR>")
+    (mkKeymap "FF" "<cmd>Telescope project<CR>")
+    (mkKeymap "/" "<cmd>Telescope current_buffer_fuzzy_find theme=dropdown<CR>")
+    (mkKeymap "<leader>ac" "<cmd>AvanteChat<CR>")
+    (mkKeymap "<leader>aC" "<cmd>AvanteChatNew<CR>")
+    (mkKeymap "<leader>gr" "<cmd>Gitsigns reset_hunk<CR>")
+    (mkKeymap "<leader>gR" "<cmd>Gitsigns reset_buffer<CR>")
+    (mkKeymap "<leader>gg" "<cmd>LazyGit<CR>")
+    (mkKeymap "t" "<cmd>ToggleTerm<CR>")
+    (mkKeymap "<leader>w" "<cmd>WhichKey<CR>")
   ];
 
   plugins = {
@@ -107,45 +55,28 @@
     indent-blankline.enable = true;
     indent-blankline.settings.indent.char = "▏";
     indent-blankline.settings.scope.enabled = false;
+
     mini.enable = true;
     mini.modules.indentscope.symbol = "▏";
     mini.modules.indentscope.options.try_as_border = true;
     mini.modules.indentscope.draw.delay = 0;
-
     mini.modules.pairs.enable = true;
 
     gitsigns.enable = true;
 
     blink-cmp.enable = true;
-    blink-cmp.settings.keymap = {
-      "<Tab>" = [
-        "select_next"
-        "fallback"
-      ];
-      "<S-Tab>" = [
-        "select_prev"
-        "fallback"
-      ];
-      "<Enter>" = [
-        "accept"
-        "fallback"
-      ];
-    };
-    blink-cmp.settings.signature.enabled = true;
-    blink-cmp.settings.completion.documentation.auto_show = true;
-    blink-cmp.settings.completion.list.selection.preselect = false;
-    blink-cmp.settings.sources.default = [
-      "lsp"
-      "path"
-      "buffer"
-      "snippets"
-      "copilot"
-    ];
-    blink-cmp.settings.sources.providers.copilot = {
-      async = true;
-      module = "blink-copilot";
-      name = "copilot";
-      score_offset = 100;
+    blink-cmp.settings = {
+      keymap."<Tab>" = [ "select_next" "fallback" ];
+      keymap."<S-Tab>" = [ "select_prev" "fallback" ];
+      keymap."<Enter>" = [ "accept" "fallback" ];
+      signature.enabled = true;
+      completion.documentation.auto_show = true;
+      completion.list.selection.preselect = false;
+      sources.default = [ "lsp" "path" "buffer" "snippets" "copilot" ];
+      sources.providers.copilot.async = true;
+      sources.providers.copilot.module = "blink-copilot";
+      sources.providers.copilot.name = "copilot";
+      sources.providers.copilot.score_offset = 100;
     };
 
     blink-copilot.enable = true;
@@ -161,16 +92,18 @@
     treesitter.settings.highlight.enable = true;
 
     lsp.enable = true;
-    lsp-format.enable = true;
     lsp.servers.nil_ls.enable = true;
     lsp.servers.nil_ls.settings.formatting.command = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
     lsp.servers.nil_ls.settings.nix.flake.autoArchive = true;
     lsp.servers.nil_ls.settings.nix.flake.autoEvalInputs = true;
 
+    lsp-format.enable = true;
+
     telescope.enable = true;
     telescope.extensions.file-browser.enable = true;
 
     noice.enable = true;
+
     web-devicons.enable = true;
 
     toggleterm.enable = true;
@@ -179,38 +112,15 @@
     lazygit.enable = true;
   };
 
-  # colorschemes.gruvbox-material.enable = true;
+  extraPlugins = with pkgs.vimPlugins; [ gruvbox-material no-neck-pain-nvim ];
 
-  extraPlugins = with pkgs.vimPlugins; [
-    gruvbox-material
-    no-neck-pain-nvim
-  ];
-
-  # Nui and Avante are old versions
   extraConfigLua = ''
     vim.deprecate = function() end
     vim.cmd("colorscheme gruvbox-material")
-    
-    -- Configure no-neck-pain manually
     local nnp_ok, nnp = pcall(require, "no-neck-pain")
     if nnp_ok then
-      nnp.setup({
-        width = 100,
-        minSideBufferWidth = 100,
-        buffers = {
-          right = {
-            enabled = false,
-          },
-          wo = {
-            fillchars = "vert: ,eob: ",
-          },
-        },
-      })
-      
-      -- Enable no-neck-pain after a short delay
-      vim.defer_fn(function()
-        vim.cmd("NoNeckPain")
-      end, 100)
+      nnp.setup({ width = 100, minSideBufferWidth = 100, buffers = { right = { enabled = false }, wo = { fillchars = "vert: ,eob: " } } })
+      vim.defer_fn(function() vim.cmd("NoNeckPain") end, 100)
     else
       vim.notify("no-neck-pain plugin not found", vim.log.levels.ERROR)
     end
