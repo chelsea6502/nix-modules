@@ -72,14 +72,8 @@ in
       signature.enabled = true;
       completion.documentation.auto_show = true;
       completion.list.selection.preselect = false;
-      sources.default = [ "lsp" "path" "buffer" "snippets" "copilot" ];
-      sources.providers.copilot.async = true;
-      sources.providers.copilot.module = "blink-copilot";
-      sources.providers.copilot.name = "copilot";
-      sources.providers.copilot.score_offset = 100;
+      sources.default = [ "lsp" "path" "buffer" "snippets" ];
     };
-
-    blink-copilot.enable = true;
 
     avante.enable = true;
     avante.settings.hints.enabled = false;
